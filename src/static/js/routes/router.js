@@ -22,7 +22,7 @@ const router = async () =>{
         };
     });
 
-    let matchedPath = pathList.filter((path)=>path.isMatch);
+    let matchedPath = pathList.find((path)=>path.isMatch);
 
     if(!matchedPath){
         // 해당되는 path가 존재하지 않으면
