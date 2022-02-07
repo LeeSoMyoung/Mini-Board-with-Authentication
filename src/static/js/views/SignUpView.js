@@ -1,16 +1,14 @@
 'use strict';
 
 import AbstractView from "./AbstractView.js";
-import { onSignUpBtnClick } from "../controllers/LogInController.js";
 
-export default class extends AbstractView {
-
-    constructor() {
+export default class extends AbstractView{
+    constructor(){
         super();
-        this.setTitle('로그인하기');
+        this.setTitle('회원가입');
     }
 
-    async getHtml() {
+    async getHtml(){
         return `
         <div class="container">
             <form class="form" id="login">
@@ -31,10 +29,7 @@ export default class extends AbstractView {
         `;
     }
 
-    attachEvent() {
-        const login_btn = document.querySelector('#login-btn');
-        const signUp_btn = document.querySelector('#signup-btn');
+    attachEvent(){
 
-        signUp_btn.addEventListener('click', onSignUpBtnClick);
     }
 }

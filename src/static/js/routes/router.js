@@ -3,38 +3,40 @@
 import LogInView from "../views/LogInView.js";
 import HomeView from '../views/HomeView.js';
 import NotFoundView from '../views/NotFoundView.js';
+import SignUpView from "../views/SignUpView.js";
 
-const navigateTo = (url)=>{
-    history.pushState(null,null,url);
+const navigateTo = (url) => {
+    history.pushState(null, null, url);
     router();
 }
 
-const router = async () =>{
+const router = async () => {
     const routes = [
-        {path:'/login', view:LogInView},
-        {path:'/', view:HomeView}
+        { path: '/login', view: LogInView },
+        { path: '/', view: HomeView },
+        { path: '/signup', view: SignUpView }
     ];
 
-    const pathList = routes.map((route)=>{
+    const pathList = routes.map((route) => {
         return {
             route: route,
-            isMatch: location.pathname===route.path
+            isMatch: location.pathname === route.path
         };
     });
 
-    let matchedPath = pathList.find((path)=>path.isMatch);
+    let matchedPath = pathList.find((path) => path.isMatch);
 
-    if(!matchedPath){
+    if (!matchedPath) {
         // 해당되는 path가 존재하지 않으면
-        matchedPath={
+        matchedPath = {
             route: {
-                path:location.pathname,
+                path: location.pathname,
                 view: NotFoundView
             },
             isMatch: true
         };
     }
-    
+
     const view = new matchedPath.route.view();
 
     const app = document.querySelector('#app');
@@ -44,4 +46,4 @@ const router = async () =>{
     view.attachEvent();
 }
 
-export {navigateTo, router};
+export { navigateTo, router };

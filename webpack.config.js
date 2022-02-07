@@ -24,9 +24,10 @@ module.exports = {
         ]
     },
     plugins: [
-       // new CleanWebPackPlugin(),
+        // new CleanWebPackPlugin(),
         new HtmlWebpackPlugin({
             template: './src/static/html/index.html'
         }),
-    ]
+    ],
+    target: ['web', 'es5']
 }
