@@ -1,6 +1,7 @@
 'use strict';
 
 import AbstractView from "./AbstractView.js";
+import { onSignUpConfirmClick } from "../controllers/SignUpController.js";
 
 export default class extends AbstractView{
     constructor(){
@@ -11,8 +12,8 @@ export default class extends AbstractView{
     async getHtml(){
         return `
         <div class="container">
-            <form class="form" id="login">
-                <h1 class="form__title">로그인 하기</h1>
+            <form class="form" id="sign-up">
+                <h1 class="form__title">회원가입 하기</h1>
                 <div class="form__message form__message--error"></div>
                 <div class="form__input-group">
                     <input type="text" class="form__input" autofocus placeholder="아이디">
@@ -21,15 +22,18 @@ export default class extends AbstractView{
                 <div class="form__input-group">
                     <input type="password" class="form__input" autofocus placeholder="비밀번호">
                     <div class="form__input-error-message"></div>
+                    <input type="password" class="form__input" autofocus placeholder="비밀번호 확인">
+                    <div class="form__input-error-message"></div>
                 </div>
-                <button class="form__button" type="submit" id="login-btn">로그인</button>
-                <button class="form__button" type="submit" id="signup-btn">회원가입</button>
+                <button class="form__button" type="submit" id="signup-confirm">회원가입</button>
             </form>
         </div>
         `;
     }
 
     attachEvent(){
+        const signUp = document.querySelector('#signup-confirm');
 
+        signUp.addEventListener('click', onSignUpConfirmClick);
     }
 }
