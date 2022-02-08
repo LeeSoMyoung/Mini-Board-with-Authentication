@@ -9,11 +9,11 @@ const cors = require('cors');
 
 const PORT = process.env.PORT||8081;
 
-app.use('/src',express.static(path.resolve(__dirname,'src')));
+app.use('/src',express.static(path.resolve(__dirname,'..','src')));
 app.use(express.json());
 
 app.get('/*',(req,res)=>{
-    res.sendFile(path.resolve(__dirname,'src','static','html','index.html'));
+    res.sendFile(path.resolve(__dirname,'..','src','static','html','index.html'));
 });
 
 app.listen(PORT, ()=>{

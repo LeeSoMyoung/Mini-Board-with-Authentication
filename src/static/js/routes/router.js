@@ -4,6 +4,7 @@ import LogInView from "../views/LogInView.js";
 import HomeView from '../views/HomeView.js';
 import NotFoundView from '../views/NotFoundView.js';
 import SignUpView from "../views/SignUpView.js";
+import WriteView from '../views/WriteView.js';
 
 const navigateTo = (url) => {
     history.pushState(null, null, url);
@@ -14,7 +15,8 @@ const router = async () => {
     const routes = [
         { path: '/login', view: LogInView },
         { path: '/', view: HomeView },
-        { path: '/signup', view: SignUpView }
+        { path: '/signup', view: SignUpView },
+        { path: '/write', view: WriteView }
     ];
 
     const pathList = routes.map((route) => {
