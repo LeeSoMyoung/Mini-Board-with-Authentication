@@ -8,4 +8,8 @@ function onSignUpConfirmClick(event) {
     navigateTo(location.origin + '/login');
 }
 
-export { onSignUpConfirmClick };
+function postSignUp(req,res){
+
+}
+
+export { onSignUpConfirmClick, postSignUp };

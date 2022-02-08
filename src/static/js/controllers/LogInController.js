@@ -7,4 +7,8 @@ function onSignUpBtnClick(event) {
     navigateTo(location.origin + '/signup');
 }
 
-export { onSignUpBtnClick };
+function onSignInSubmit(event){
+    event.preventDefault();
+}
+
+export { onSignUpBtnClick, onSignInSubmit };

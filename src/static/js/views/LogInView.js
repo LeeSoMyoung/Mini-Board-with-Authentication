@@ -1,7 +1,7 @@
 'use strict';
 
 import AbstractView from "./AbstractView.js";
-import { onSignUpBtnClick } from "../controllers/LogInController.js";
+import { onSignUpBtnClick, onSignInSubmit } from "../controllers/LogInController.js";
 
 export default class extends AbstractView {
 
@@ -34,7 +34,10 @@ export default class extends AbstractView {
     attachEvent() {
         const login_btn = document.querySelector('#login-btn');
         const signUp_btn = document.querySelector('#signup-btn');
+        const login_form = document.querySelector('#login');
 
         signUp_btn.addEventListener('click', onSignUpBtnClick);
+        login_btn.addEventListener('click', onSignInSubmit);
+        login_form.addEventListener('submit', onSignInSubmit);
     }
 }
