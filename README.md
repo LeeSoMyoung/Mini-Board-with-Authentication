@@ -13,3 +13,10 @@ MySQL, node js, Vanilla JS를 사용한 미니 게시판
 |---|---|
 |Front-end|Vanilla js HTML CSS|
 |Back-end| MySQL, Node.js|
+
+# ERD
+![image](https://user-images.githubusercontent.com/47571973/152902087-c0ae482f-015a-4db9-898f-66d33cd28085.png)
+
+회원 가입을 위한 Users 테이블과 게시글 작성 포스트를 위한 Posts 테이블이 존재한다.
+
+4번 기능(작성한 글 목록)을 위해 Posts 테이블의 uid 속성은 Users의 PK인 uid와 같다.
