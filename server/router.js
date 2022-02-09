@@ -107,7 +107,7 @@ router.post('/write', (req, res, next) => {
 // http://localhost:PORT
 // 메인 화면-> 게시물 리스트(제목만 노출)
 router.get('/', (req, res, next) => {
-
+    
 });
 
 module.exports = router;

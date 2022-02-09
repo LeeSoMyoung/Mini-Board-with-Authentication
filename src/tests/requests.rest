@@ -5,11 +5,13 @@ Content-Type: application/json
 
 {
     id:"aaaaa00000",
-    pw: "123456789",
-    username:"lee"
+    pw: "1234567890",
+    username:"lee",
+    pw_repeat: "1234567890"
 }
 
 ## login
+
 POST http://localhost:3000/login
 
 {

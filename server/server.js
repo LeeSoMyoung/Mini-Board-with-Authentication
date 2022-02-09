@@ -13,7 +13,7 @@ const router = require('./router.js');
 
 app.use('/src',express.static(path.resolve(__dirname,'..','src')));
 app.use(express.json());
-app.use('/api', router);
+app.use('/', router);
 
 app.get('/*',(req,res)=>{
     res.sendFile(path.resolve(__dirname,'..','src','static','html','index.html'));
