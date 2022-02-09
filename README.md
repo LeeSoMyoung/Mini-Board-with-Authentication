@@ -20,3 +20,6 @@ MySQL, node js, Vanilla JS를 사용한 미니 게시판
 회원 가입을 위한 Users 테이블과 게시글 작성 포스트를 위한 Posts 테이블이 존재한다.
 
 4번 기능(작성한 글 목록)을 위해 Posts 테이블의 uid 속성은 Users의 PK인 uid와 같다.
+
+# API 명세서
+![image](https://user-images.githubusercontent.com/47571973/153152788-0b953faf-746c-4bb3-a318-4a5c51de4233.png)
