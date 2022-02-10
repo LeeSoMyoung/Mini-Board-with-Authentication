@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server/server.js",
     "build": "webpack",
-    "test": "mocha ./src/tests/signup.spec.js"
+    "test": "mocha ./src/tests/login.spec.js"
   },
   "repository": {
     "type": "git",
