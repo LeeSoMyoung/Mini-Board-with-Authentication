@@ -1,11 +1,15 @@
 'use strict';
 
+require('dotenv').config();
+
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 
-router.get('/', (req,res)=>console.log('login router is working'));
+const db = require('../../src/lib/db.js');
 
 router.post('/', (req, res, next) => {
+    console.log('login router is working!');
     db.query(`
         SELECT * FROM USERS
         WHERE ID = ${db.escape(req.body.id)}
@@ -13,13 +17,13 @@ router.post('/', (req, res, next) => {
     (err,res)=>{
         if(err){
             throw err;
-            return res.sendStatus(400).send({
+            return res.status(400).send({
                 message: err
             });
         }
         if(!res.length){
             // 존재하지 않는 유저라면
-            return res.sendStatus(401).send({
+            return res.status(401).send({
                 message: "아이디나 비밀번호가 잘못되었습니다."
             });
         }
@@ -29,7 +33,7 @@ router.post('/', (req, res, next) => {
             if(bErr){
                 // 비밀번호가 틀렸다면
                 throw bErr;
-                return res.sendStatus(401).send({
+                return res.status(401).send({
                     message: "아이디나 패스워드가 일치하지 않습니다"
                 });
             }
@@ -41,7 +45,7 @@ router.post('/', (req, res, next) => {
                 };
                 const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET,{expiresIn:"7d"});
 
-                return res.sendStatus(200).send({
+                return res.status(200).send({
                     message: "로그인에 성공하였습니다.",
                     accessToken: accessToken,
                     user: res[0]

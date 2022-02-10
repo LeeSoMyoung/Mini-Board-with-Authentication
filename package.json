@@ -4,9 +4,9 @@
   "description": "MySQL, node js, Vanilla JS를 사용한 미니 게시판",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/server.js",
-    "build": "webpack"
+    "build": "webpack",
+    "test": "mocha ./src/tests/signup.spec.js"
   },
   "repository": {
     "type": "git",
