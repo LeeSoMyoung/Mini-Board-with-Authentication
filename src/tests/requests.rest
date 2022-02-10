@@ -4,18 +4,17 @@ POST http://localhost:3000/signup
 Content-Type: application/json
 
 {
-    id:"aaaaa00000",
-    pw: "1234567890",
-    username:"lee",
-    pw_repeat: "1234567890"
+    "id":"aaaaa00000",
+    "pw": "1234567890",
+    "username":"lee"
 }
 
-## login
 
+## login
 POST http://localhost:3000/login
+Content-Type: application/json
 
 {
     id:"jaksdkfljaslkdf",
-    pw: "1234",
-    username:"lee"
+    pw: "1234"
 }
