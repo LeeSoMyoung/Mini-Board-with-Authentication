@@ -9,58 +9,44 @@ const uuid = require('uuid');
 const userMiddleware = require('../../middlewares/users.js');
 const db = require('../../src/lib/db.js');
 
-router.post("/", userMiddleware.validateRegister, (req, res, next) => {
-    console.log('sign up router is working');
+router.post('/', userMiddleware.validateRegister, async (req, res) => {
+
+    const { id, username } = req.body;
+
+    const hashedPassword = await bcrypt.hash(req.body.pw, 10);
+
     db.query(`
         SELECT id FROM USERS
-        WHERE id = ${req.body.id}
+        WHERE id = ${id}
     `,
         (err, res) => {
-            if (res !== null) {
-                // 이미 사용 중인 id여서 리턴되는 id값이 존재할 때
-                return res.status(409).send({
-                    message: "이미 존재하는 id입니다"
+            if (res !== undefined) {
+                // 이미 유저가 존재할 때
+                return res.status(400).send({
+                    message: "이미 존재하는 아이디입니다."
                 });
             }
             else {
-                // id가 존재하지 않을 때 -> 가입 가능
-                bcrypt.hash(req.body.pw, 10, (err, hash) => {
+                db.query(`
+                INSERT INTO USERS
+                (uid, id, pw, username)
+                VALUES (${db.escape(uuid.v4())}, ${db.escape(id)}, ${db.escape(hashedPassword)},${db.escape(username)})
+            `, (err, res) => {
                     if (err) {
-                        // 에러 발생 시
                         throw err;
-                        return res.status(500).send({
+                        return res.status(400).send({
                             message: err
                         });
                     }
                     else {
-                        // 비밀번호 해싱 작업이 오류없이 성공했을 시
-                        db.query(`
-                        INSERT INTO USERS 
-                        (uid, id, pw, username)
-                        VALUES
-                        (${uuid.v4()},
-                        '${db.escape(req.body.id)}', 
-                        '${hash}', '${db.escape(req.body.username)}')
-                    `,
-                            (err, res) => {
-                                if (err) {
-                                    throw err;
-                                    return res.status(400).send({
-                                        message: err
-                                    });
-                                }
-                                else {
-                                    return res.status(201).send({
-                                        message: "가입되었습니다"
-                                    });
-                                }
-                            }
-                        );
+                        return res.status(201).send({
+                            message: "가입되었습니다."
+                        });
                     }
                 });
             }
-        }
-    );
+        });
+
 });
 
 module.exports = router;
