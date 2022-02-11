@@ -15,7 +15,7 @@ MySQL, node js, Vanilla JS를 사용한 미니 게시판
 |Back-end| MySQL, Node.js|
 
 # ERD
-![image](https://user-images.githubusercontent.com/47571973/152902087-c0ae482f-015a-4db9-898f-66d33cd28085.png)
+![image](https://user-images.githubusercontent.com/47571973/153625981-794e8a72-2851-4cab-b0e9-fbd7f3f23beb.png)
 
 회원 가입을 위한 Users 테이블과 게시글 작성 포스트를 위한 Posts 테이블이 존재한다.
 
