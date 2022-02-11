@@ -17,10 +17,10 @@ router.post('/', userMiddleware.validateRegister, async (req, res) => {
 
     db.query(`
         SELECT id FROM USERS
-        WHERE id = ${id}
+        WHERE id = ${db.escape(id)}
     `,
-        (err, res) => {
-            if (res !== undefined) {
+        (err, result) => {
+            if (result !== undefined) {
                 // 이미 유저가 존재할 때
                 return res.status(400).send({
                     message: "이미 존재하는 아이디입니다."
@@ -31,7 +31,7 @@ router.post('/', userMiddleware.validateRegister, async (req, res) => {
                 INSERT INTO USERS
                 (uid, id, pw, username)
                 VALUES (${db.escape(uuid.v4())}, ${db.escape(id)}, ${db.escape(hashedPassword)},${db.escape(username)})
-            `, (err, res) => {
+            `, (err, dbRes) => {
                     if (err) {
                         throw err;
                         return res.status(400).send({
