@@ -4,8 +4,8 @@ import AbstractView from "./AbstractView.js";
 import { onSignUpConfirmClick } from "../controllers/SignUpController.js";
 
 export default class extends AbstractView{
-    constructor(){
-        super();
+    constructor(params){
+        super(params);
         this.setTitle('회원가입');
     }
 

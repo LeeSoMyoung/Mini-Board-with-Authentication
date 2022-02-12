@@ -16,7 +16,7 @@ describe('회원가입 테스트================= ',()=>{
         .expect(201)
         .end((err,res)=>{
             if(err){
-                done(err);
+                console.log(err);
             }
             else{
                 console.log(res.body);
@@ -28,8 +28,8 @@ describe('회원가입 테스트================= ',()=>{
         server
         .post('/signup')
         .send({
-            "id": "a",
-            "pw": "a",
+            "id": "jaslkgjklsdjflkjaskldfjklasjdf",
+            "pw": "aff",
             "pw_repeat": "a",
             "username": "안알랴줌"
         })

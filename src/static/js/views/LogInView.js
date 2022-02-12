@@ -5,8 +5,8 @@ import { onSignUpBtnClick, onSignInSubmit } from "../controllers/LogInController
 
 export default class extends AbstractView {
 
-    constructor() {
-        super();
+    constructor(params) {
+        super(params);
         this.setTitle('로그인하기');
     }
 

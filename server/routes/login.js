@@ -5,6 +5,7 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const db = require('../../src/lib/db.js');
 const userMiddleware = require('../../middlewares/users.js');
@@ -29,19 +30,31 @@ router.post('/', (req, res) => {
             }
             else {
                 bcrypt.compare(req.body.pw, result[0]['pw'],
-                    (err, result) => {
-                        if (err) {
+                    (bErr, bRes) => {
+                        if (bErr) {
                             // 에러가 발생했다면
-                            throw err;
+                            throw bErr;
                             return res.status(401).send({
                                 message: "아이디나 패스워드가 일치하지 않습니다."
                             });
                         }
                         // 비번이 일치하면 res에 true, 일치하지 않으면 false가 담긴다.
-                        if (result) {
+                        if (bRes) {
                             // 비밀번호가 일치한다면
+                            const currentUser = {
+                                uid: result[0]['uid'],
+                                username: result[0]['username']
+                            };
+
+                            const accessToken = jwt.sign(
+                                currentUser,
+                                process.env.ACCESS_TOKEN_SECRET,
+                                {expiresIn:"15d"}
+                            );
                             return res.status(200).send({
-                                message: "로그인 성공"
+                                message: "로그인 성공",
+                                accessToken,
+                                user: result[0]
                             });
                         }
                         else {

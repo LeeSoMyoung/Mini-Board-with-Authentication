@@ -4,11 +4,11 @@ const express = require('express');
 const router = express.Router();
 
 const db = require('../../src/lib/db.js');
-const writeMiddleware = require('../../middlewares/write.js');
+const userMiddleware = require('../../middlewares/users.js');
 
-router.post('/',(req,res)=>{
+router.post('/',userMiddleware.isLoggedIn,(req,res)=>{
     const {title, contents} = req.body;
-    
+
 });
 
 module.exports = router;
