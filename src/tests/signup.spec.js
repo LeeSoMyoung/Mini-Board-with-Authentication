@@ -16,7 +16,7 @@ describe('회원가입 테스트================= ',()=>{
         .expect(201)
         .end((err,res)=>{
             if(err){
-                console.log(err);
+                done(err);
             }
             else{
                 console.log(res.body);
