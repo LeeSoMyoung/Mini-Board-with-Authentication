@@ -25,3 +25,7 @@ MySQL, node js, Vanilla JS를 사용한 미니 게시판
 ![image](https://user-images.githubusercontent.com/47571973/153152788-0b953faf-746c-4bb3-a318-4a5c51de4233.png)
 
 <a href="https://ordinary-bait-736.notion.site/Mini-Board-with-Authentication-API-3021f34860624022805be3498e567158">자세한 API 명세서</a>
+
+# Back-end
+## (1) 회원가입 기능
+![ezgif-3-93bb1715e4](https://user-images.githubusercontent.com/47571973/153738318-0122ab49-1b0e-4edb-8dfe-4a3846346962.gif)
