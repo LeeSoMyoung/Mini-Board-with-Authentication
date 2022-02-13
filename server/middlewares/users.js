@@ -26,6 +26,12 @@ module.exports = {
                 message: "비밀번호가 알맞지 않습니다."
             });
         }
+
+        if(!req.body.username){
+            return res.status(400).send({
+                message: "이름이 입력되지 않았습니다."
+            });
+        }
         next();
     },
     isLoggedIn: (req, res, next) => {
