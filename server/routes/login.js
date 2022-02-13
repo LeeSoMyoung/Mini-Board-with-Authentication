@@ -8,9 +8,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const db = require('../../src/lib/db.js');
-const userMiddleware = require('../../middlewares/users.js');
+const userMiddleware = require('../middlewares/users.js');
 
-router.post('/', (req, res) => {
+router.post('/', userMiddleware.isLoggedIn, (req, res) => {
     db.query(`
         SELECT * FROM USERS
         WHERE ID = ${db.escape(req.body.id)}
@@ -49,7 +49,7 @@ router.post('/', (req, res) => {
                             const accessToken = jwt.sign(
                                 currentUser,
                                 process.env.ACCESS_TOKEN_SECRET,
-                                {expiresIn:"15d"}
+                                { expiresIn: "15d" }
                             );
                             return res.status(200).send({
                                 message: "로그인 성공",

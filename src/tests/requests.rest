@@ -1,14 +1,9 @@
-POST http://localhost:3000/login
-Content-Type: application/json
-
-{
-    "id":"jaksdkfljaslkdf",
-    "pw": "1234"
-}
-
 POST http://localhost:3000/signup
 Content-Type: application/json
 
 {
-    
+    "id":"jaksdkfljaslkdf",
+    "pw": "1234",
+    "pw_repeat":"1234",
+    "username":"lee"
 }
