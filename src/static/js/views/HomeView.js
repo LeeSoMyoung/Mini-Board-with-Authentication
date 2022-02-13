@@ -10,7 +10,12 @@ export default class extends AbstractView {
     }
 
     async getHtml(){
-        return `<h1>홈 화면</h1>`;
+        return `
+        <table class="table">
+            
+        </table>
+        
+        `;
     }
 
     attachEvent(){

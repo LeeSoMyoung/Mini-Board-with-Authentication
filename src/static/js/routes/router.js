@@ -6,14 +6,15 @@ import NotFoundView from '../views/NotFoundView.js';
 import SignUpView from "../views/SignUpView.js";
 import WriteView from '../views/WriteView.js';
 import PostView from "../views/PostView.js";
+import PostListView from "../views/PostListView.js";
 
-const pathToRegex = (path) => new RegExp('^'+path.replace(/\//g, '\\/').replace(/:\w+/g,"(.+)")+"$");
+const pathToRegex = (path) => new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, "(.+)") + "$");
 
-const getParams = (match)=>{
+const getParams = (match) => {
     const values = match.result.slice(1);
-    const keys = Array.from(match.route.path.matchAll(/:(\w+)/g)).map((result)=>result[1]);
+    const keys = Array.from(match.route.path.matchAll(/:(\w+)/g)).map((result) => result[1]);
 
-    return Object.fromEntries(keys.map((key,i)=>{
+    return Object.fromEntries(keys.map((key, i) => {
         return [key, values[i]];
     }));
 };
@@ -29,7 +30,8 @@ const router = async () => {
         { path: '/', view: HomeView },
         { path: '/signup', view: SignUpView },
         { path: '/:pid', view: PostView },
-        { path: '/write', view: WriteView }
+        { path: '/write', view: WriteView },
+        { path: '/written/:id', view: PostListView }
     ];
 
     const pathList = routes.map((route) => {
@@ -41,8 +43,6 @@ const router = async () => {
 
     let matchedPath = pathList.find((path) => path.result !== null);
 
-    console.log(matchedPath);
-
     if (!matchedPath) {
         // 해당되는 path가 존재하지 않으면
         matchedPath = {
@@ -50,7 +50,7 @@ const router = async () => {
                 path: location.pathname,
                 view: NotFoundView
             },
-            result: origin+location.pathname
+            result: origin + location.pathname
         };
     }
 
