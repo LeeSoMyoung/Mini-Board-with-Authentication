@@ -49,5 +49,27 @@ module.exports = {
                 message: "유효하지 않은 세션입니다."
             });
         };
+    },
+
+    isLoggedIn: (req,res,next)=>{
+        try {
+            const authHeader = req.headers.authorization;
+            const accessToken = authHeader && authHeader.split(' ')[1];
+            if (accessToken) {
+                const isValid = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+                req.user = isValid;
+            }
+            else {
+                res.redirect(`http://localhost:${process.env.PORT}/login`);
+            }
+            next();
+        }
+        catch (err) {
+            throw err;
+            return res.status(400).send({
+                message: "유효하지 않은 토큰입니다."
+            });
+        };
+        next();
     }
 }
