@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 const db = require('../../src/lib/db.js');
 const userMiddleware = require('../middlewares/users.js');
 
-router.post('/', userMiddleware.isLoggedIn, (req, res) => {
+router.post('/', (req, res) => {
     db.query(`
         SELECT * FROM USERS
         WHERE ID = ${db.escape(req.body.id)}
@@ -43,7 +43,8 @@ router.post('/', userMiddleware.isLoggedIn, (req, res) => {
                             // 비밀번호가 일치한다면
                             const currentUser = {
                                 uid: result[0]['uid'],
-                                username: result[0]['username']
+                                username: result[0]['username'],
+                                id: result[0]['id']
                             };
 
                             const accessToken = jwt.sign(
@@ -51,10 +52,13 @@ router.post('/', userMiddleware.isLoggedIn, (req, res) => {
                                 process.env.ACCESS_TOKEN_SECRET,
                                 { expiresIn: "15d" }
                             );
+
+                            // 쿠키를 세팅한다.
+                            res.cookie(process.env.COOKIE_NAME, accessToken);
+
                             return res.status(200).send({
                                 message: "로그인 성공",
-                                accessToken,
-                                user: result[0]
+                                accessToken
                             });
                         }
                         else {
@@ -66,6 +70,5 @@ router.post('/', userMiddleware.isLoggedIn, (req, res) => {
             }
         });
 });
-
 
 module.exports = router;
