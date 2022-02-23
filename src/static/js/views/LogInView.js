@@ -17,11 +17,11 @@ export default class extends AbstractView {
                 <h1 class="form__title">로그인 하기</h1>
                 <div class="form__message form__message--error"></div>
                 <div class="form__input-group">
-                    <input type="text" class="form__input" autofocus placeholder="아이디">
+                    <input type="text" class="form__input" id="id" autofocus placeholder="아이디">
                     <div class="form__input-error-message"></div>
                 </div>
                 <div class="form__input-group">
-                    <input type="password" class="form__input" autofocus placeholder="비밀번호">
+                    <input type="password" id="pw" class="form__input" autofocus placeholder="비밀번호">
                     <div class="form__input-error-message"></div>
                 </div>
                 <button class="form__button" type="submit" id="login-btn">로그인</button>
@@ -36,8 +36,16 @@ export default class extends AbstractView {
         const signUp_btn = document.querySelector('#signup-btn');
         const login_form = document.querySelector('#login');
 
+        //// input 값들
+        const id = document.querySelector('#id');
+        const pw = document.querySelector('#pw');
+
         signUp_btn.addEventListener('click', onSignUpBtnClick);
-        login_btn.addEventListener('click', onSignInSubmit);
-        login_form.addEventListener('submit', onSignInSubmit);
+        login_btn.addEventListener('click', (event) => {
+            onSignInSubmit(event, id.value, pw.value);
+        });
+        login_form.addEventListener('submit', (event) => {
+            onSignInSubmit(event, id.value, pw.value);
+        });
     }
 }

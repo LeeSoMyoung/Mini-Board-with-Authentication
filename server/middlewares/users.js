@@ -27,49 +27,38 @@ module.exports = {
             });
         }
 
-        if(!req.body.username){
+        if (!req.body.username) {
             return res.status(400).send({
                 message: "이름이 입력되지 않았습니다."
             });
         }
         next();
     },
+
     isLoggedIn: (req, res, next) => {
-        try {
-            const authHeader = req.headers.authorization;
-            const token = authHeader && authHeader.split(' ')[1];
-            const isValid = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        console.log(req.cookies);
+       /* const accessToken = req.cookies[process.env.COOKIE_NAME];
 
-            req.user = isValid;
-            next();
+        if(!accessToken){
+            // access token이 존재하지 않는다면
+            res.redirect(`http://localhost:${process.env.PORT}/login`);
         }
-        catch (err) {
-            throw err;
-            return res.status(400).send({
-                message: "유효하지 않은 세션입니다."
-            });
-        };
-    },
-
-    isLoggedIn: (req,res,next)=>{
-        try {
-            const authHeader = req.headers.authorization;
-            const accessToken = authHeader && authHeader.split(' ')[1];
-            if (accessToken) {
+        else{
+            // access token이 존재한다면
+            // 유효성 검사
+            try{
                 const isValid = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
-                req.user = isValid;
+                req.username = isValid.username;
+                req.uid = isValid.uid;
+                req.id = isValid.id;
+                next();
             }
-            else {
-                res.redirect(`http://localhost:${process.env.PORT}/login`);
+            catch(err){
+                throw new Error(err.message);
+                return res.status(403).send({
+                   message:"유효하지 않은 토큰입니다." 
+                });
             }
-            next();
-        }
-        catch (err) {
-            throw err;
-            return res.status(400).send({
-                message: "유효하지 않은 토큰입니다."
-            });
-        };
-        next();
+        }*/
     }
 }
