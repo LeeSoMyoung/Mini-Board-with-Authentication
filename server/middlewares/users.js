@@ -36,6 +36,7 @@ module.exports = {
     },
 
     isLoggedIn: (req, res, next) => {
+
         const accessToken = req.cookies[process.env.COOKIE_NAME];
 
         if(!accessToken){

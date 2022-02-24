@@ -27,7 +27,6 @@ function onSignUpConfirmClick(event, username, id, pw, pw_repeat) {
                 // 로그인에 실패하면
                return res.json().then((result)=>{
                    alert(result.message);
-                   throw new Error(result.message);
                });
             }
         })

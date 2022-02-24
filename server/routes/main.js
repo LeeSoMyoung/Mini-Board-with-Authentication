@@ -6,7 +6,7 @@ const router = express.Router();
 const userMiddleware = require('../middlewares/users.js');
 const db = require('../../src/lib/db.js');
 
-/*
+
 router.get('/', userMiddleware.isLoggedIn, (req, res) => {
     db.query(`
         SELECT title FROM POSTS
@@ -34,6 +34,6 @@ router.get('/', userMiddleware.isLoggedIn, (req, res) => {
 router.get('/:pid', userMiddleware.isLoggedIn, (req, res) => {
 
 });
-*/
+
 
 module.exports = router;
