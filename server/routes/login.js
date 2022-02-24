@@ -11,64 +11,60 @@ const db = require('../../src/lib/db.js');
 const userMiddleware = require('../middlewares/users.js');
 
 router.post('/', (req, res) => {
+
+    const id = req.body.id;
+
     db.query(`
         SELECT * FROM USERS
-        WHERE ID = ${db.escape(req.body.id)}
+        WHERE id = ${db.escape(id)}
     `,
-        (err, result) => {
-            if (err) {
-                throw err;
-                return res.status(400).send({
-                    message: err
+        (dbErr, dbRes) => {
+            if (dbErr) {
+                // 쿼리문에서 에러가 발생했다면
+                throw dbErr;
+                return res.status(500).send({
+                    message: dbErr
                 });
             }
-            if (!result.length) {
-                // 존재하지 않는 유저라면
+            if (dbRes.length === 0) {
                 return res.status(401).send({
                     message: "존재하지 않는 유저입니다."
                 });
             }
             else {
-                bcrypt.compare(req.body.pw, result[0]['pw'],
-                    (bErr, bRes) => {
-                        if (bErr) {
-                            // 에러가 발생했다면
-                            throw bErr;
-                            return res.status(401).send({
-                                message: "아이디나 패스워드가 일치하지 않습니다."
-                            });
-                        }
-                        // 비번이 일치하면 res에 true, 일치하지 않으면 false가 담긴다.
-                        if (bRes) {
-                            // 비밀번호가 일치한다면
-                            const currentUser = {
-                                uid: result[0]['uid'],
-                                username: result[0]['username'],
-                                id: result[0]['id']
-                            };
+                bcrypt.compare(req.body.pw, dbRes[0]['pw'], (bErr, bRes) => {
+                    if (bErr) {
+                        // 비밀번호 확인 과정에서 bcrypt에서 에러가 났을 시
+                        throw bErr;
+                        return res.status(500).send({
+                            message: bErr
+                        });
+                    }
+                    if (bRes) {
+                        // 비밀번호가 일치하면
+                        const currentUser = {
+                            uid: dbRes[0]['uid'],
+                            id: dbRes[0]['id'],
+                            username: dbRes[0]['username']
+                        };
 
-                            const accessToken = jwt.sign(
-                                currentUser,
-                                process.env.ACCESS_TOKEN_SECRET,
-                                { expiresIn: "15d" }
-                            );
+                        const accessToken = jwt.sign(currentUser, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "7d" });
 
-                            // 쿠키를 세팅한다.
-                            res.cookie(process.env.COOKIE_NAME, accessToken);
+                        res.cookie(process.env.COOKIE_NAME, accessToken); // accessToken을 쿠키로 전달하여 브라우저에 저장한다.
 
-                            return res.status(200).send({
-                                message: "로그인 성공",
-                                accessToken
-                            });
-                        }
-                        else {
-                            return res.status(403).send({
-                                message: "아이디나 비밀번호가 일치하지 않습니다."
-                            });
-                        }
-                    });
+                        return res.status(200).send({
+                            message: "로그인 성공",
+                            accessToken
+                        });
+                    }
+                    else {
+                        // 비밀번호가 일치하지 않으면
+                        return res.status(403).send({
+                            message: "아이디나 비밀번호가 일치하지 않습니다."
+                        });
+                    }
+                });
             }
         });
 });
-
 module.exports = router;

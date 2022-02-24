@@ -36,8 +36,7 @@ module.exports = {
     },
 
     isLoggedIn: (req, res, next) => {
-        console.log(req.cookies);
-       /* const accessToken = req.cookies[process.env.COOKIE_NAME];
+        const accessToken = req.cookies[process.env.COOKIE_NAME];
 
         if(!accessToken){
             // access token이 존재하지 않는다면
@@ -59,6 +58,6 @@ module.exports = {
                    message:"유효하지 않은 토큰입니다." 
                 });
             }
-        }*/
+        }
     }
 }

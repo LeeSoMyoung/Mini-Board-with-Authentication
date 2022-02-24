@@ -27,12 +27,12 @@ function onSignInSubmit(event, id, pw) {
             else {
                 return res.json().then((message) => {
                     alert(message.message);
-                    throw new Error(message);
+                    throw message;
                 })
             }
         })
         .catch((err) => {
-            throw new Error(err.message);
+            throw err;
         });
 }
 
