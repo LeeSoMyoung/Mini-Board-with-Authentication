@@ -9,6 +9,8 @@ import PostView from "../views/PostView.js";
 import PostListView from "../views/PostListView.js";
 import MainView from '../views/MainView.js';
 
+import onLogOutBtnClicked from "../controllers/LogOutController.js";
+
 const pathToRegex = (path) => new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, "(.+)") + "$");
 
 const getParams = (match) => {
@@ -60,9 +62,13 @@ const router = async () => {
 
     const app = document.querySelector('#app');
 
+    const logout_btn = document.querySelector('#a__log-out');
+
     app.innerHTML = await view.getHtml();
 
     view.attachEvent();
+
+    logout_btn.addEventListener('click', onLogOutBtnClicked);
 }
 
 export { navigateTo, router };

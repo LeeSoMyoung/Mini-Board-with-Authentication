@@ -36,3 +36,13 @@
     line-height: 1.5;
     font-weight: 500;
 }
+
+body {
+    --nav-width: 150px;
+    margin: 0 0 0 var(--nav-width);
+    font-size: 18px;
+}
+
+.input__write{
+    display: block;
+}

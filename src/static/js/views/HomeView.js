@@ -11,9 +11,7 @@ export default class extends AbstractView {
 
     async getHtml(){
         return `
-        <table class="table">
-            
-        </table>
+        <h1>게시물 리스트 </h1>
         
         `;
     }
