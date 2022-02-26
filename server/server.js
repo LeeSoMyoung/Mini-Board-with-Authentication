@@ -15,6 +15,7 @@ const signupRouter = require('./routes/signup.js');
 const writeRouter = require('./routes/write.js');
 const postRouter = require('./routes/post.js');
 const mainRouter = require('./routes/main.js');
+const logoutRouter = require('./routes/logout.js');
 
 app.use('/src', express.static(path.resolve(__dirname, '..', 'src')));
 app.use(express.json());
@@ -25,6 +26,7 @@ app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
 app.use('/write', writeRouter);
 app.use('/post', postRouter);
+app.use('/logout', logoutRouter);
 app.use('/', mainRouter);
 
 app.get('/*', (req, res) => {

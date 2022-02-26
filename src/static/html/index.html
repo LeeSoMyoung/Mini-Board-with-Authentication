@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href="/src/static/css/index.css">
     <title>미니 게시판</title>
 </head>
 <body>
+    <nav class="nav__bar">
+        <a href="/" class="nav__link" data-link>내 정보</a>
+        <a href="/dashboard" class="nav__link" data-link>게시판</a>
+        <a href="/write" class="nav__link" data-link>글쓰기</a>
+        <a href="/logout" class = "nav__link" data-link>로그아웃</a>
+    </nav>
     <div id = "app"></div>
     <script type="module" src="/src/index.js"></script>
 </body>
