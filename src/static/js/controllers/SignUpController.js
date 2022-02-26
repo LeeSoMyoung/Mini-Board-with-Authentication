@@ -21,7 +21,6 @@ function onSignUpConfirmClick(event, username, id, pw, pw_repeat) {
         .then((res) => {
             if(res.ok && res.status === 201){
                 navigateTo(location.origin+'/login');
-                return 
             }
             else{
                 // 로그인에 실패하면

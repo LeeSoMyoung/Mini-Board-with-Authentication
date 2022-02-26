@@ -24,7 +24,8 @@ router.get('/', (req, res) => {
                 const postList = result;
 
                 return res.status(200).send({
-                    message: "성공적으로 게시물을 불러왔습니다."
+                    message: "성공적으로 게시물을 불러왔습니다.",
+                    postList
                 });
             }
         }

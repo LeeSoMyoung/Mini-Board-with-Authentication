@@ -39,24 +39,24 @@ module.exports = {
 
         const accessToken = req.cookies[process.env.COOKIE_NAME];
 
-        if(!accessToken){
+        if (!accessToken) {
             // access token이 존재하지 않는다면
-            res.redirect(`http://localhost:${process.env.PORT}/login`);
+            res.redirect('http://localhost:3000/login');
         }
-        else{
+        else {
             // access token이 존재한다면
             // 유효성 검사
-            try{
+            try {
                 const isValid = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
                 req.username = isValid.username;
                 req.uid = isValid.uid;
                 req.id = isValid.id;
                 next();
             }
-            catch(err){
-                throw new Error(err.message);
+            catch (err) {
+                throw err;
                 return res.status(403).send({
-                   message:"유효하지 않은 토큰입니다." 
+                    message: "유효하지 않은 토큰입니다."
                 });
             }
         }

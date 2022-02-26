@@ -6,6 +6,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
 const PORT = process.env.PORT || 8081;
 
@@ -18,6 +19,7 @@ const mainRouter = require('./routes/main.js');
 app.use('/src', express.static(path.resolve(__dirname, '..', 'src')));
 app.use(express.json());
 app.use(cookieParser());
+app.use(logger('dev'));
 
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);

@@ -6,8 +6,10 @@ const router = express.Router();
 const userMiddleware = require('../middlewares/users.js');
 const db = require('../../src/lib/db.js');
 
+router.get('/',userMiddleware.isLoggedIn);
 
-router.get('/', userMiddleware.isLoggedIn, (req, res) => {
+router.get('/dashboard', userMiddleware.isLoggedIn, (req, res) => {
+    
     db.query(`
         SELECT title FROM POSTS
     `, (dbErr, dbRes) => {
@@ -18,11 +20,13 @@ router.get('/', userMiddleware.isLoggedIn, (req, res) => {
                 message: dbErr
             });
         }
+
         if (dbRes.length === 0) {
             return res.status(200).send({
                 message: "게시물이 존재하지 않습니다."
             });
         }
+
         else {
             return res.status(200).send({
                 message: "게시물들을 성공적으로 불러왔습니다."
@@ -31,7 +35,7 @@ router.get('/', userMiddleware.isLoggedIn, (req, res) => {
     });
 });
 
-router.get('/:pid', userMiddleware.isLoggedIn, (req, res) => {
+router.get('/dashboard/:pid', userMiddleware.isLoggedIn, (req, res) => {
 
 });
 

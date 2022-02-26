@@ -7,6 +7,7 @@ import SignUpView from "../views/SignUpView.js";
 import WriteView from '../views/WriteView.js';
 import PostView from "../views/PostView.js";
 import PostListView from "../views/PostListView.js";
+import MainView from '../views/MainView.js';
 
 const pathToRegex = (path) => new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, "(.+)") + "$");
 
@@ -27,9 +28,10 @@ const navigateTo = (url) => {
 const router = async () => {
     const routes = [
         { path: '/login', view: LogInView },
-        { path: '/', view: HomeView },
+        { path: '/dashboard', view: HomeView },
+        { path: '/', view: MainView },
         { path: '/signup', view: SignUpView },
-        { path: '/:pid', view: PostView },
+        { path: '/dashboard/:pid', view: PostView },
         { path: '/write', view: WriteView },
         { path: '/written/:id', view: PostListView }
     ];
