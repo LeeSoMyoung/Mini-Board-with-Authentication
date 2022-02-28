@@ -25,7 +25,7 @@ app.use(logger('dev'));
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
 app.use('/write', writeRouter);
-app.use('/post', postRouter);
+app.use('/dashboard', postRouter);
 app.use('/logout', logoutRouter);
 app.use('/', mainRouter);
 
