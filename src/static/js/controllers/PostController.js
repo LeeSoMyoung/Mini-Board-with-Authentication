@@ -1,6 +1,6 @@
 'use strict';
 
-import { navigateTo } from "../routes/router";
+import { navigateTo } from "../routes/router.js";
 
 const onSubmitBtnClick = (event, title, content) => {
     event.preventDefault();
