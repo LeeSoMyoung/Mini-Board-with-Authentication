@@ -35,6 +35,10 @@ export default class extends AbstractView {
         const login_btn = document.querySelector('#login-btn');
         const signUp_btn = document.querySelector('#signup-btn');
         const login_form = document.querySelector('#login');
+        const nav__bar = document.querySelector('nav');
+        const HIDDEN_CLASS_NAME = 'hidden';
+
+        nav__bar.classList.add(HIDDEN_CLASS_NAME);
 
         //// input 값들
         const id = document.querySelector('#id');

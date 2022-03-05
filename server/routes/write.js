@@ -31,6 +31,10 @@ router.post('/', userMiddleware.isLoggedIn, writeMiddleware.vaildPost, (req, res
         else {
             // 게시물 작성 후 업로드 완료되면 
             res.redirect(`http://localhost:${process.env.PORT}`);
+
+            return res.status(201).send({
+                message: "게시물이 업로드 되었습니다."
+            });
         }
     });
 });

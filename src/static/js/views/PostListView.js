@@ -13,4 +13,11 @@ export default class extends AbstractView{
             <h1></h1>
         `;
     }
+
+    attachEvent(){
+        const nav__bar = document.querySelector('nav');
+        const HIDDEN_CLASS_NAME = 'hidden';
+
+        nav__bar.classList.remove(HIDDEN_CLASS_NAME);
+    }
 }

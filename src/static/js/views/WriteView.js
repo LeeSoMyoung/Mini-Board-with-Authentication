@@ -2,6 +2,8 @@
 
 import AbstractView from "./AbstractView.js";
 
+import { onSubmitBtnClick } from "../controllers/PostController.js";
+
 export default class extends AbstractView{
     constructor(params){
         super(params);
@@ -20,5 +22,16 @@ export default class extends AbstractView{
 
     attachEvent(){
         const submitPostBtn = document.querySelector('#submit-post');
+        const nav__bar = document.querySelector('nav');
+        const HIDDEN_CLASS_NAME = 'hidden';
+
+        const title = document.querySelector('#title');
+        const content = document.querySelector('#contents');
+
+        nav__bar.classList.remove(HIDDEN_CLASS_NAME);
+
+        submitPostBtn.addEventListener('click',(event)=>{
+            onSubmitBtnClick(event, title.value, content.value);
+        });
     }
 }
