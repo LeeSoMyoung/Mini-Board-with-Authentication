@@ -36,7 +36,8 @@ router.get('/dashboard', userMiddleware.isLoggedIn, (req, res) => {
 });
 
 router.get('/dashboard/:pid', userMiddleware.isLoggedIn, (req, res) => {
-
+    const pid = req.params;
+    console.log('req body',req.body);
 });
 
 

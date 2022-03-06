@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:pid', async (req, res) => {
-    const { pid } = req.params; // 게시물 id를 가져온다.
+    const { pid } = req.params; // 게시물 pid를 가져온다.
 
     db.query(`
         SELECT * FROM POSTS

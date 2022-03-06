@@ -32,4 +32,15 @@ const onSubmitBtnClick = (event, title, content) => {
         })
 }
 
-export { onSubmitBtnClick };
+const getPost = async (pid) =>{
+    await fetch(`http://localhost:3000/${pid}`)
+    .then((data)=>{
+        console.log(data);
+    })
+    .catch((err)=>{
+        throw err;
+        console.log(err);
+    });
+};
+
+export { onSubmitBtnClick, getPost };

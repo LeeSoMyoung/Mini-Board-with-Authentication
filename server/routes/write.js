@@ -36,8 +36,34 @@ router.post('/', userMiddleware.isLoggedIn, writeMiddleware.vaildPost, (req, res
     });
 });
 
-router.put('/write/:pid', userMiddleware.isLoggedIn, writeMiddleware.vaildPost, writeMiddleware.validUser, asyn(req, res)=> {
+router.put('/write/:pid', userMiddleware.isLoggedIn, writeMiddleware.vaildPost, writeMiddleware.validUser, (req, res) => {
+    const { title, content, pid } = req.body;
 
+    db.query(
+        `
+            UPDATE * FROM POSTS
+            SET 
+            title = ${db.escape(title)},
+            content = ${db.escape(content)},
+            update_date = ${new Date().now()}
+            WHERE pid = ${db.escape(pid)}
+
+        `,
+        (dbErr, dbRes)=>{
+            if(dbErr){
+                // DB 업데이트 과정 중 에러가 발생했다면
+                throw dbErr;
+                return res.status(500).send({
+                    message: dbErr
+                });
+            }
+            else{
+                return res.status(200).send({
+                    message: "게시물이 수정되었습니다."
+                });
+            }
+        }
+    );
 });
 
 module.exports = router;
