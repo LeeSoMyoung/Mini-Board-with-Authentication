@@ -12,13 +12,11 @@ const writeMiddleware = require('../middlewares/write.js');
 router.post('/', userMiddleware.isLoggedIn, writeMiddleware.vaildPost, (req, res) => {
     const { title, content } = req.body;
 
-    console.log(req.uid);
-
     db.query(`
         INSERT INTO POSTS
         (pid, uid, title, content)
         VALUES
-        (${db.escape(uuid.v4())}, ${req.uid}, ${db.escape(title)}, ${db.escape(content)})
+        (${db.escape(uuid.v4())}, ${db.escape(req.uid)}, ${db.escape(title)}, ${db.escape(content)})
     `, (dbErr, dbRes) => {
 
         if (dbErr) {
@@ -30,13 +28,16 @@ router.post('/', userMiddleware.isLoggedIn, writeMiddleware.vaildPost, (req, res
 
         else {
             // 게시물 작성 후 업로드 완료되면 
-            res.redirect(`http://localhost:${process.env.PORT}`);
 
             return res.status(201).send({
                 message: "게시물이 업로드 되었습니다."
             });
         }
     });
+});
+
+router.put('/write/:pid', userMiddleware.isLoggedIn, writeMiddleware.vaildPost, writeMiddleware.validUser, asyn(req, res)=> {
+
 });
 
 module.exports = router;

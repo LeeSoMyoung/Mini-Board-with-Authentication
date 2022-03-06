@@ -12,14 +12,13 @@ const onSubmitBtnClick = (event, title, content) => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: {
+            body: JSON.stringify({
                 "title": title,
                 "content": content
-            }
+            })
         }
     ).then((res) => {
         if(res.ok && res.status === 201){
-            console.log(res);
             navigateTo(location.origin);
         }
         else{

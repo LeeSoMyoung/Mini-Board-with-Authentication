@@ -1,9 +1,11 @@
 'use strict';
 
+require('dotenv').config();
+
 module.exports = {
     vaildPost: (req, res, next) => {
         const title = req.body.title;
-        const content = req.body.title;
+        const content = req.body.content;
 
         console.log(title, content);
 
@@ -20,5 +22,10 @@ module.exports = {
         }
 
         next();
+    },
+
+    validUser: (req, res, next) => {
+        // 게시물을 수정할때 올바른 유저인지 확인 하는 작업
+
     }
 }
