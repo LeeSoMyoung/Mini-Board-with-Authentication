@@ -2,6 +2,7 @@ const should = require('should');
 const supertest = require('supertest');
 
 const server = supertest.agent('http://localhost:3000');
+const app = require('../../server/server.js');
 
 describe('로그인 테스트================= ',()=>{
     it('1. 로그인 실패의 경우',(done)=>{

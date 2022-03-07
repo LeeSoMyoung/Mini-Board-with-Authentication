@@ -1,8 +1,11 @@
 'use strict';
 
-const supertest = require('supertest');
+require('dotenv').config();
 
-const server = supertest.agent('http://localhost:3000');
+const supertest = require('supertest');
+const app = require('../../server/server.js');
+
+const server = supertest.agent(`http://localhost:3000/${process.env.PORT}`);
 
 describe('게시물 변경 테스트', () => {
     it('1. 게시물 수정 실패 테스트', (done) => {

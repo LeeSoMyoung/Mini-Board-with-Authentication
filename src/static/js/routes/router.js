@@ -35,7 +35,7 @@ const router = async () => {
         { path: '/signup', view: SignUpView },
         { path: '/dashboard/:pid', view: PostView },
         { path: '/write', view: WriteView },
-        { path: '/written/:id', view: PostListView }
+        { path: '/written/:uid', view: PostListView }
     ];
 
     const pathList = routes.map((route) => {

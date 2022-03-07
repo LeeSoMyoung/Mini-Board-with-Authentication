@@ -5,7 +5,9 @@ const router = express.Router();
 
 const db = require('../../src/lib/db.js');
 
-router.get('/', (req, res) => {
+const userMiddleware = require('../middlewares/users.js');
+
+router.get('/', userMiddleware.isLoggedIn, (req, res) => {
     db.query(`
         SELECT * FROM POSTS
     `,

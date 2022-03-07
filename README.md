@@ -11,8 +11,9 @@ MySQL, node js, Vanilla JS를 사용한 미니 게시판
 # Tech Stack
 |파트|기술 스택|
 |---|---|
-|Front-end|Vanilla js HTML CSS|
-|Back-end| MySQL, Node.js|
+|Front-end|Vanilla js, HTML, CSS|
+|Back-end|MySQL, Node.js|
+|테스트 코드|Mocha, supertest, should|
 
 # ERD
 ![image](https://user-images.githubusercontent.com/47571973/153625981-794e8a72-2851-4cab-b0e9-fbd7f3f23beb.png)
@@ -22,10 +23,9 @@ MySQL, node js, Vanilla JS를 사용한 미니 게시판
 4번 기능(작성한 글 목록)을 위해 Posts 테이블의 uid 속성은 Users의 PK인 uid와 같다.
 
 # API 명세서
-![image](https://user-images.githubusercontent.com/47571973/153152788-0b953faf-746c-4bb3-a318-4a5c51de4233.png)
+![image](https://user-images.githubusercontent.com/47571973/156912024-5e4c0e90-df39-4eef-a89f-a3a55a74febb.png)
 
 <a href="https://ordinary-bait-736.notion.site/Mini-Board-with-Authentication-API-3021f34860624022805be3498e567158">자세한 API 명세서</a>
 
-# Back-end
-## (1) 회원가입 기능
-![ezgif-3-93bb1715e4](https://user-images.githubusercontent.com/47571973/153738318-0122ab49-1b0e-4edb-8dfe-4a3846346962.gif)
+# 시연 영상
+

@@ -2,22 +2,26 @@
 
 import AbstractView from "./AbstractView.js";
 
+import { getPostList } from '../controllers/PostController.js';
+
 export default class extends AbstractView {
-    
-    constructor(params){
+
+    constructor(params) {
         super(params);
-        this.setTitle('게시물');
+        this.setTitle('게시물 목록');
     }
 
-    async getHtml(){
+    async getHtml() {
         return `
-        <h1>게시물 리스트 </h1>
-        
+            <div id="div__post-list">
+            </div>
         `;
     }
 
-    attachEvent(){
+    async attachEvent() {
+        const div__postList = document.querySelector('#div__post-list');
 
+        await getPostList(div__postList);
+        
     }
-
 }

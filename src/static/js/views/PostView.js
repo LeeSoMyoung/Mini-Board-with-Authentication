@@ -1,7 +1,7 @@
 'use strict';
 
+import { getPostDetail } from "../controllers/PostController.js";
 import AbstractView from "./AbstractView.js";
-import { getPost } from "../controllers/PostController.js";
 
 export default class extends AbstractView{
     constructor(params){
@@ -9,12 +9,15 @@ export default class extends AbstractView{
     }
 
     async getHtml(){
-        return `<h1>게시물 뷰</h1>`;
+        return `
+            <div id="div__post-detail"></div>
+        `;
     }
 
     async attachEvent(){
-        console.log(params);
-        const currentPost = await getPost(params);
-        console.log(currentPost);
+        const pid = location.pathname.replace('/dashboard/','');
+        const div__postView = document.querySelector('#div__post-detail');
+
+        await getPostDetail(pid, div__postView);
     }
 }
