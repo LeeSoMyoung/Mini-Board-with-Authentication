@@ -5,7 +5,9 @@ import { navigateTo } from "../routes/router.js";
 function onSignUpConfirmClick(event, username, id, pw, pw_repeat) {
     event.preventDefault();
 
-    fetch('http://localhost:3000/signup', {
+    const signUpPath = `${location.origin}/signup`;
+    
+    fetch(signUpPath, {
         credentials: "include",
         method: "POST",
         headers: {

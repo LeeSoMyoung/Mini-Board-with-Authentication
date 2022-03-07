@@ -21,7 +21,9 @@ const onSubmitBtnClick = (event, title, content) => {
         }
     ).then((res) => {
         if (res.ok && res.status === 201) {
-            navigateTo(location.origin);
+            const dashboard = `${location.origin}/dashboard`;
+            
+            navigateTo(dashboard);
         }
         else {
             res.json().then((result) => {

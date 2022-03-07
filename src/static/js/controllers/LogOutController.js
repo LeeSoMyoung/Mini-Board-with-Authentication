@@ -8,7 +8,9 @@ export default function onLogOutBtnClicked(event) {
     const nav__bar = document.querySelector('nav');
     const HIDDEN_CLASS_NAME = 'hidden';
 
-    fetch('http://localhost:3000/logout');
+    const logOutPath = `${location.origin}/logout`;
+    
+    fetch(logOutPath);
 
     nav__bar.classList.add(HIDDEN_CLASS_NAME);
 

@@ -13,7 +13,9 @@ function onSignInSubmit(event, id, pw) {
     const nav__bar = document.querySelector('nav');
     const HIDDEN_CLASS_NAME = 'hidden';
 
-    fetch('http://localhost:3000/login', {
+    const signInPath = `${location.origin}/login`;
+
+    fetch(signInPath, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -26,7 +28,8 @@ function onSignInSubmit(event, id, pw) {
     })
         .then((res) => {
             if (res.ok && res.status === 200) {
-                navigateTo('http://localhost:3000');
+                const origin = location.origin;
+                navigateTo(origin);
                 nav__bar.classList.remove(HIDDEN_CLASS_NAME);
             }
             else {
