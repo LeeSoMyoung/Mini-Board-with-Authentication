@@ -2,6 +2,8 @@
 
 import AbstractView from "./AbstractView.js";
 
+import { getUserInfo } from "../controllers/UserInfoContorller.js";
+
 export default class extends AbstractView{
     constructor(){
         super();
@@ -10,14 +12,20 @@ export default class extends AbstractView{
 
     async getHtml(){
         return `
-            <h1>메인 화면</h1>
+            <h1 id="h1__curent-user"></h1>
+            <div id="div__user-info"></div>
         `;
     }
 
-    attachEvent(){
+    async attachEvent(){
         const nav__bar = document.querySelector('nav');
         const HIDDEN_CLASS_NAME = 'hidden';
 
+        const currentUser = document.querySelector('#h1__current-user');
+        const div__userInfo = document.querySelector('#div__user-info');
+
         nav__bar.classList.remove(HIDDEN_CLASS_NAME);
+
+        await getUserInfo(div__userInfo, currentUser);
     }
 }

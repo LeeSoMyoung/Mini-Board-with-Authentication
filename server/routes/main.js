@@ -8,6 +8,37 @@ const db = require('../../src/lib/db.js');
 
 router.get('/', userMiddleware.isLoggedIn);
 
+/*
+router.get('/', userMiddleware.isLoggedIn, async (req,res)=>{
+
+    const uid = req.uid;
+
+    await db.query(`
+        SELECT * FROM USERS
+        WHERE uid = ${db.escape(uid)}
+    `,
+    (dbErr, dbRes)=>{
+        if(dbErr){
+            throw dbErr;
+            return res.status(500).send({
+                message:dbErr
+            });
+        }
+        else{
+            const currentUser = {
+                uid : dbRes[0]['uid'],
+                id: dbRes[0]['id'],
+                username: dbRes[0]['username']
+            };
+            return res.status(200).send({
+                message:"사용자 정보를 성공적으로 불러왔습니다.",
+                currentUser
+            })
+        }
+    });
+});
+*/
+
 router.get('/dashboard', userMiddleware.isLoggedIn, (req, res) => {
 
     db.query(`
@@ -63,6 +94,5 @@ router.get('/written/:uid', userMiddleware.isLoggedIn, (req, res) => {
             }
         });
 });
-
 
 module.exports = router;

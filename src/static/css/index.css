@@ -46,3 +46,7 @@ body {
 .input__write{
     display: block;
 }
+
+#div__post-list{
+    cursor: pointer;
+}
