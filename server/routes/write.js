@@ -36,18 +36,17 @@ router.post('/', userMiddleware.isLoggedIn, writeMiddleware.vaildPost, (req, res
     });
 });
 
-router.put('/write/:pid', userMiddleware.isLoggedIn, writeMiddleware.vaildPost, writeMiddleware.validUser, (req, res) => {
+router.put('/:pid', userMiddleware.isLoggedIn, writeMiddleware.vaildPost, writeMiddleware.validUser, (req, res) => {
     const { title, content, pid } = req.body;
 
     db.query(
         `
-            UPDATE * FROM POSTS
+            UPDATE POSTS
             SET 
             title = ${db.escape(title)},
             content = ${db.escape(content)},
-            update_date = ${new Date().now()}
+            update_date = ${db.escape(new Date())}
             WHERE pid = ${db.escape(pid)}
-
         `,
         (dbErr, dbRes)=>{
             if(dbErr){

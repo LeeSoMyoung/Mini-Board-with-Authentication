@@ -6,6 +6,7 @@ const router = express.Router();
 const db = require('../../src/lib/db.js');
 
 const userMiddleware = require('../middlewares/users.js');
+const writeMiddleware = require('../middlewares/write.js');
 
 router.get('/', userMiddleware.isLoggedIn, (req, res) => {
     db.query(`
@@ -79,6 +80,33 @@ router.get('/:pid', async (req, res) => {
 
         }
     });
+});
+
+router.delete('/:pid', userMiddleware.isLoggedIn, (req,res)=>{
+    
+    const pid = req.params;
+    
+    db.query(
+        `
+            DELETE FROM POSTS
+            WHERE pid = ${db.escape(pid)}
+        `
+        ,
+        (dbErr, dbRes)=>{
+            if(dbErr){
+                throw dbErr;
+                return res.status(500).message({
+                    message: dbErr
+                });
+            }
+
+            else{
+                return res.status(200).message({
+                    message:"게시물이 성공적으로 삭제되었습니다."
+                });
+            }
+        }
+    );
 });
 
 module.exports = router;

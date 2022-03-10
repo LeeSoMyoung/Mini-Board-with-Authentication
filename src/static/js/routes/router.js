@@ -1,5 +1,7 @@
 'use strict';
+//////////////////////////////////////
 
+// view 파일들
 import LogInView from "../views/LogInView.js";
 import HomeView from '../views/HomeView.js';
 import NotFoundView from '../views/NotFoundView.js';
@@ -8,7 +10,9 @@ import WriteView from '../views/WriteView.js';
 import PostView from "../views/PostView.js";
 import PostListView from "../views/PostListView.js";
 import MainView from '../views/MainView.js';
+import ModifyView from "../views/ModifyView.js";
 
+// 이벤트 함수
 import onLogOutBtnClicked from "../controllers/LogOutController.js";
 
 const pathToRegex = (path) => new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, "(.+)") + "$");
@@ -35,7 +39,8 @@ const router = async () => {
         { path: '/signup', view: SignUpView },
         { path: '/dashboard/:pid', view: PostView },
         { path: '/write', view: WriteView },
-        { path: '/written/:uid', view: PostListView }
+        { path: '/written/:uid', view: PostListView },
+        { path: '/write/:pid', view: ModifyView }
     ];
 
     const pathList = routes.map((route) => {

@@ -30,7 +30,9 @@ module.exports = {
         const isValid = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
 
         const currentUser = isValid.uid;
-        const postUser = req.body.uid;
+        const postUser = req.uid;
+
+        console.log(currentUser, postUser);
 
         if(currentUser === postUser){
             // 글 작성자와 현재 유저가 같다면 수정작업 진행
