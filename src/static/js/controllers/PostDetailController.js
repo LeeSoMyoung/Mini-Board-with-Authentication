@@ -21,4 +21,26 @@ const onGoPreviousBtnClicked = (event) => {
     history.back();
 }
 
-export { onModifyBtnClicked, onPostListBtnClicked, onGoPreviousBtnClicked };
+const onDeleteBtnClicked = async (event, pid) =>{
+    event.preventDefault();
+
+    const currentURL = `${location.origin}/dashboard/${pid}`;
+    const fetchInit = {
+        method:'DELETE'
+    };
+
+    await fetch(currentURL,fetchInit)
+    .then((res)=>{
+        if(res.ok&&res.status===200){
+
+            const dashboardURL = `${location.origin}/dashboard`;
+
+            navigateTo(dashboardURL);
+        }
+    })
+    .catch((err)=>{
+        throw err;
+    });
+}
+
+export { onModifyBtnClicked, onPostListBtnClicked, onGoPreviousBtnClicked, onDeleteBtnClicked };

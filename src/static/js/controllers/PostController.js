@@ -88,21 +88,27 @@ const getPostDetail = async (pid, div__postView) => {
             data.json().then((post) => {
 
                 const title= post.currentPost.title;
-                const content = post.currentPost.content; 
+                const content = post.currentPost.content;
+                const username = post.currentPost.username;
 
                 const titleLi = document.createElement('li');
                 const contentLi = document.createElement('li');
+                const usernameLi = document.createElement('li');
 
                 const titleSpan = document.createElement('span');
                 const contentSpan = document.createElement('span');
+                const usernameSpan = document.createElement('span');
 
                 titleSpan.innerText = title;
                 contentSpan.innerText = content;
+                usernameSpan.innerText = username;
 
                 titleLi.appendChild(titleSpan);
                 contentLi.appendChild(contentSpan);
+                usernameLi.appendChild(usernameSpan);
 
                 div__postView.appendChild(titleLi);
+                div__postView.appendChild(usernameLi);
                 div__postView.appendChild(contentLi);
 
             });
