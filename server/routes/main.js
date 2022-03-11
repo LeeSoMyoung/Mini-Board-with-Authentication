@@ -52,10 +52,10 @@ router.get('/dashboard', userMiddleware.isLoggedIn, (req, res) => {
 
 router.get('/written/:uid', userMiddleware.isLoggedIn, (req, res) => {
 
-    const currentUser = req.params;
+    const currentUser = req.uid;
 
     db.query(`
-        SELECT * FROM POSTS
+        SELECT pid, title FROM POSTS
         WHERE uid = ${db.escape(currentUser)}
     `,
         (dbErr, dbRes) => {
@@ -69,7 +69,16 @@ router.get('/written/:uid', userMiddleware.isLoggedIn, (req, res) => {
             else {
                 // 해당 유저가 작성한 게시물 목록을 성공적으로 불러온 경우
 
-                const postList = dbRes;
+                const postList = [];
+
+                dbRes.forEach((post)=>{
+                    const data = {
+                        "pid":post.pid,
+                        "title":post.title
+                    };
+
+                    postList.push(data);
+                });
 
                 return res.status(200).send({
                     message: "작성 글 목록을 성공적으로 불러왔습니다.",

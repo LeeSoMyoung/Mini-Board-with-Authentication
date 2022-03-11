@@ -16,7 +16,6 @@ const writeRouter = require('./routes/write.js');
 const postRouter = require('./routes/post.js');
 const mainRouter = require('./routes/main.js');
 const logoutRouter = require('./routes/logout.js');
-const writtenRouter = require('./routes/written.js');
 
 app.use('/src', express.static(path.resolve(__dirname, '..', 'src')));
 app.use(express.json());
@@ -29,7 +28,6 @@ app.use('/write', writeRouter);
 app.use('/dashboard', postRouter);
 app.use('/logout', logoutRouter);
 app.use('/', mainRouter);
-app.use('/written', writtenRouter);
 
 app.get('/*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '..', 'src', 'static', 'html', 'index.html'));

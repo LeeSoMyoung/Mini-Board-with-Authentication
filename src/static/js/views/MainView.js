@@ -26,9 +26,11 @@ export default class extends AbstractView{
 
         const currentUser = document.querySelector('h1');
         const user_id = document.querySelector('#h3__user-id');
+        const btn__getPosts = document.querySelector('#btn__getPosts');
 
         nav__bar.classList.remove(HIDDEN_CLASS_NAME);
 
-        await getUserInfo(user_id, currentUser);
+        await getUserInfo(user_id, currentUser, btn__getPosts);
+
     }
 }
