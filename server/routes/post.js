@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 const express = require('express');
 const router = express.Router();
 
@@ -11,6 +13,7 @@ const writeMiddleware = require('../middlewares/write.js');
 router.get('/', userMiddleware.isLoggedIn, (req, res) => {
     db.query(`
         SELECT * FROM POSTS
+        ORDER BY date
     `,
         (err, result) => {
             if (err) {
@@ -71,30 +74,30 @@ router.get('/:pid', async (req, res) => {
                         SELECT username FROM USERS
                         WHERE uid = ${db.escape(uid)}
                     `,
-                    (usernameErr, usernameRes)=>{
-                        if(usernameErr){
-                            throw usernameErr;
-                            return res.status(500).send({
-                                message:"유저 이름을 불러오는데 실패하였습니다."
-                            });
-                        }
-                        else{
-                            // 유저 이름을 성공적으로 불러왔을 경우
-                            const currentPost = {
-                                pid: dbRes[0]['pid'],
-                                uid,
-                                content: dbRes[0]['content'],
-                                username: usernameRes[0]['username'],
-                                title: dbRes[0]['title'],
-                                date: dbRes[0]['date']
+                        (usernameErr, usernameRes) => {
+                            if (usernameErr) {
+                                throw usernameErr;
+                                return res.status(500).send({
+                                    message: "유저 이름을 불러오는데 실패하였습니다."
+                                });
                             }
-        
-                            return res.status(200).send({
-                                message: "성공적으로 포스팅을 불러왔습니다",
-                                currentPost
-                            });
-                        }
-                    });
+                            else {
+                                // 유저 이름을 성공적으로 불러왔을 경우
+                                const currentPost = {
+                                    pid: dbRes[0]['pid'],
+                                    uid,
+                                    content: dbRes[0]['content'],
+                                    username: usernameRes[0]['username'],
+                                    title: dbRes[0]['title'],
+                                    date: dbRes[0]['date']
+                                }
+
+                                return res.status(200).send({
+                                    message: "성공적으로 포스팅을 불러왔습니다",
+                                    currentPost
+                                });
+                            }
+                        });
 
                 }
 
@@ -106,30 +109,25 @@ router.delete('/:pid', userMiddleware.isLoggedIn, writeMiddleware.validUser, (re
 
     const pid = req.params;
 
-    try {
-        db.query(
-            `DELETE FROM POSTS WHERE pid =${db.escape(pid)}`
-            ,
-            (dbErr, dbRes) => {
-                if (dbErr) {
-                    throw dbErr;
-                    return res.status(500).send({
-                        message: dbErr
-                    });
-                }
-
-                else {
-                    return res.status(204).send({
-                        message: "게시물이 성공적으로 삭제되었습니다."
-                    });
-                }
+    db.query(
+        `DELETE FROM POSTS WHERE POSTS.pid =${db.escape(pid)}`
+        ,
+        (dbErr, dbRes) => {
+            if (dbErr) {
+                throw dbErr;
+                return res.status(500).send({
+                    message: dbErr
+                });
             }
-        );
-    }
-    catch (err) {
-        throw err;
-        console.log(err);
-    }
+
+            else {
+                return res.status(204).send({
+                    message: "게시물이 성공적으로 삭제되었습니다."
+                });
+            }
+        }
+    );
+        
 });
 
 module.exports = router;

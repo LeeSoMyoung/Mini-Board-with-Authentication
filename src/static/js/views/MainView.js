@@ -13,7 +13,10 @@ export default class extends AbstractView{
     async getHtml(){
         return `
             <h1 id="h1__curent-user"></h1>
-            <div id="div__user-info"></div>
+            <div id="div__user-info">
+                <h3 id="h3__user-id"></h3>
+                <button id="btn__getPosts">작성한 글 목록</button>
+            </div>
         `;
     }
 
@@ -21,11 +24,11 @@ export default class extends AbstractView{
         const nav__bar = document.querySelector('nav');
         const HIDDEN_CLASS_NAME = 'hidden';
 
-        const currentUser = document.querySelector('#h1__current-user');
-        const div__userInfo = document.querySelector('#div__user-info');
+        const currentUser = document.querySelector('h1');
+        const user_id = document.querySelector('#h3__user-id');
 
         nav__bar.classList.remove(HIDDEN_CLASS_NAME);
 
-        await getUserInfo(div__userInfo, currentUser);
+        await getUserInfo(user_id, currentUser);
     }
 }

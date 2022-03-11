@@ -32,7 +32,6 @@ const onDeleteBtnClicked = async (event, pid) =>{
     await fetch(currentURL,fetchInit)
     .then((res)=>{
         if(res.ok&&res.status===200){
-
             const dashboardURL = `${location.origin}/dashboard`;
 
             navigateTo(dashboardURL);
