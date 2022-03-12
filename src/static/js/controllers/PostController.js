@@ -1,6 +1,7 @@
 'use strict';
 
 import { navigateTo } from "../routes/router.js";
+import { getLiElement } from "./WrittenController.js";
 
 const onSubmitBtnClick = (event, title, content) => {
     event.preventDefault();
@@ -54,11 +55,8 @@ const getPostList = async (div__postList) => {
             data.json().then((posts) => {
                 const lists = posts.postList;
                 lists.forEach((post) => {
-                    const li = document.createElement('li');
-                    const span = document.createElement('span');
 
-                    span.innerText = post.title;
-                    li.appendChild(span);
+                    const li = getLiElement(post.title);
 
                     li.addEventListener('click', (event) => {
                         onPostTitleClicked(event, post.pid);
@@ -91,21 +89,9 @@ const getPostDetail = async (pid, div__postView) => {
                 const content = post.currentPost.content;
                 const username = post.currentPost.username;
 
-                const titleLi = document.createElement('li');
-                const contentLi = document.createElement('li');
-                const usernameLi = document.createElement('li');
-
-                const titleSpan = document.createElement('span');
-                const contentSpan = document.createElement('span');
-                const usernameSpan = document.createElement('span');
-
-                titleSpan.innerText = title;
-                contentSpan.innerText = content;
-                usernameSpan.innerText = username;
-
-                titleLi.appendChild(titleSpan);
-                contentLi.appendChild(contentSpan);
-                usernameLi.appendChild(usernameSpan);
+                const titleLi = getLiElement(title);
+                const contentLi = getLiElement(content);
+                const usernameLi = getLiElement(username);
 
                 div__postView.appendChild(titleLi);
                 div__postView.appendChild(usernameLi);

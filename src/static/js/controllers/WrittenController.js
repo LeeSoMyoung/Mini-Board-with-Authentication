@@ -15,14 +15,9 @@ const getList = async (uid, div__list) => {
                     const pid = post.pid;
                     const title = post.title;
 
-                    const li = document.createElement('li');
-                    const span = document.createElement('span');
+                    const li = getLiElement(title);
 
-                    span.innerText = title;
-
-                    li.appendChild(span);
-
-                    li.addEventListener('click', (event,pid)=>{
+                    li.addEventListener('click', (event)=>{
                         onWrittenTitleClicked(event,pid);
                     });
 
@@ -52,4 +47,15 @@ const onWrittenTitleClicked = (event, pid) =>{
     navigateTo(postURL);
 }
 
-export { getList, onWrittenListClicked };
+const getLiElement = (value) =>{
+    const li = document.createElement('li');
+    const span = document.createElement('span');
+
+    span.innerText = value;
+
+    li.append(span);
+
+    return span;
+}
+
+export { getList, onWrittenListClicked, getLiElement };
