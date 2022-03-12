@@ -1,9 +1,12 @@
 'use strict';
 
+require('dotenv').config();
+
 const express = require('express');
 const router = express.Router();
 
 const uuid = require('uuid');
+const jwt = require('jsonwebtoken');
 
 const db = require('../../src/lib/db.js');
 const userMiddleware = require('../middlewares/users.js');
@@ -36,7 +39,7 @@ router.post('/', userMiddleware.isLoggedIn, writeMiddleware.vaildPost, (req, res
     });
 });
 
-router.put('/:pid', userMiddleware.isLoggedIn, writeMiddleware.vaildPost, writeMiddleware.validUser, (req, res) => {
+router.put('/:pid', userMiddleware.isLoggedIn, writeMiddleware.vaildPost, (req, res) => {
     const { title, content, pid } = req.body;
 
     db.query(

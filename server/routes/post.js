@@ -105,7 +105,7 @@ router.get('/:pid', async (req, res) => {
         });
 });
 
-router.delete('/:pid', userMiddleware.isLoggedIn, writeMiddleware.validUser, (req, res) => {
+router.delete('/:pid', userMiddleware.isLoggedIn, (req, res) => {
 
     const pid = req.params;
 
