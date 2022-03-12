@@ -13,7 +13,7 @@ export default class extends AbstractView {
 
     async getHtml() {
         return `
-            <div id="div__post-list">
+            <div class="titles" id="div__post-list">
             </div>
         `;
     }

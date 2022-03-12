@@ -27,6 +27,8 @@ export default class extends AbstractView{
         const modifyContent = document.querySelector('#input__modify-contents');
         const submitModify = document.querySelector('#submit-modify');
 
+        setPreviousPost(pid, modifyTitle, modifyContent);
+
         submitModify.addEventListener('click', (event)=>{
             onModifySubmit(event, pid, modifyTitle.value, modifyContent.value);
         });

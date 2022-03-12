@@ -50,3 +50,11 @@ body {
 #div__post-list{
     cursor: pointer;
 }
+
+.titles{
+    cursor: pointer;
+}
+
+li{
+    list-style: none;
+}

@@ -2,14 +2,19 @@
 
 import { navigateTo } from "../routes/router.js";
 
-const setPreviousPost = async (event, pid, title, post) => {
-    event.preventDefault();
+const setPreviousPost = async (pid, titleContainer, contentContainer) => {
 
-    const currentURL = `${location.origin}/dashboard/pid`;
+    const currentURL = `${location.origin}/dashboard/${pid}`;
 
     await fetch(currentURL)
-        .then((data) => {
+        .then((res) => {
+            res.json().then((data) => {
+                const title = data.currentPost.title;
+                const content = data.currentPost.content;
 
+                titleContainer.value = title;
+                contentContainer.value = content;
+            });
         })
         .catch((err) => {
             throw err;
@@ -25,7 +30,7 @@ const onModifySubmit = async (event, pid, title, content) => {
         headers: {
             "Content-Type": "application/json"
         },
-        body:JSON.stringify({
+        body: JSON.stringify({
             "title": title,
             "content": content,
             "pid": pid
