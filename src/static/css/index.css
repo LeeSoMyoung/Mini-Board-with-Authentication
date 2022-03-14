@@ -2,14 +2,6 @@
     display: none;
 }
 
-.input__write{
-    display: inline-block;
-}
-
-#goHome{
-    
-}
-
 .form__input-group{
     display: block;
 }
@@ -55,6 +47,48 @@ body {
     cursor: pointer;
 }
 
+
 li{
     list-style: none;
+}
+
+input{
+    display: block;
+}
+
+#title{
+    margin: auto;
+    height: 50px;
+    width: 500px;
+    text-align: center;
+}
+
+#contents{
+    margin: auto;
+    margin-top: 15px;
+    height: 500px;
+    width: 500px;
+    text-align: center;
+}
+
+#submit-post{
+    margin:auto;
+    height: 50px;
+    width: 200px;
+    font-size: x-large;
+}
+
+#input__modify-title {
+    margin: auto;
+    height: 50px;
+    width: 500px;
+    text-align: center;
+}
+
+#input__modify-contents {
+    margin: auto;
+    margin-top: 15px;
+    height: 500px;
+    width: 500px;
+    text-align: center;
 }

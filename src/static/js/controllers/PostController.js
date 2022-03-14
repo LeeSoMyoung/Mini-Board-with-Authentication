@@ -78,9 +78,9 @@ const getPostDetail = async (pid, div__postView) => {
                 const content = post.currentPost.content;
                 const username = post.currentPost.username;
 
-                const titleLi = getLiElement(title);
+                const titleLi = getLiElement(`제목: ${title}`);
                 const contentLi = getLiElement(content);
-                const usernameLi = getLiElement(username);
+                const usernameLi = getLiElement(`작성자: ${username}`);
 
                 div__postView.appendChild(titleLi);
                 div__postView.appendChild(usernameLi);
