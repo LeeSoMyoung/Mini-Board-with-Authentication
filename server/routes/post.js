@@ -107,27 +107,55 @@ router.get('/:pid', async (req, res) => {
 
 router.delete('/:pid', userMiddleware.isLoggedIn, (req, res) => {
 
-    const pid = req.params;
+    const { pid } = req.params;
+    const uid = req.uid;
 
     db.query(
-        `DELETE FROM POSTS WHERE POSTS.pid =${db.escape(pid)}`
+        `SELECT uid FROM POSTS
+        WHERE pid = ${db.escape(pid)}
+        `
         ,
-        (dbErr, dbRes) => {
-            if (dbErr) {
-                throw dbErr;
+        (uidErr, uidRes) => {
+            if (uidErr) {
+                throw uidErr;
                 return res.status(500).send({
-                    message: dbErr
+                    message: "작성자 정보를 불러오는 데 실패했습니다."
                 });
             }
-
             else {
-                return res.status(204).send({
-                    message: "게시물이 성공적으로 삭제되었습니다."
-                });
+                const writer = uidRes[0]['uid'];
+
+                if (uid === writer) {
+
+                    db.query(`
+                        DELETE FROM POSTS
+                        WHERE pid=${db.escape(pid)}
+                    `,
+                        (deleteErr, deleteRes) => {
+                            if (deleteErr) {
+                                throw deleteErr;
+                                return res.status(500).send({
+                                    message: "삭제 도중 오류가 발생하였습니다."
+                                });
+                            }
+                            else {
+                                return res.status(204).send({
+                                    message: "성공적으로 삭제되었습니다."
+                                });
+                            }
+                        }
+                    );
+
+                }
+                else {
+                    return res.status(403).send({
+                        message: "삭제 권한이 없습니다."
+                    });
+                }
             }
         }
     );
-        
+
 });
 
 module.exports = router;
