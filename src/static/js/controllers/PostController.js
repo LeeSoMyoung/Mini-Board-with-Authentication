@@ -37,17 +37,6 @@ const onSubmitBtnClick = (event, title, content) => {
         })
 }
 
-const getPost = (pid) => {
-    fetch(`http://localhost:3000/dashboard/${pid}`)
-        .then((data) => {
-            console.log(data);
-        })
-        .catch((err) => {
-            throw err;
-            console.log(err);
-        });
-};
-
 const getPostList = async (div__postList) => {
     const postListPath = `${location.origin}/dashboard`;
     await fetch(postListPath)
@@ -105,4 +94,4 @@ const getPostDetail = async (pid, div__postView) => {
         });
 }
 
-export { onSubmitBtnClick, getPost, getPostList, getPostDetail };
+export { onSubmitBtnClick, getPostList, getPostDetail };

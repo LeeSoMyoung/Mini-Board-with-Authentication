@@ -26,15 +26,20 @@ const onDeleteBtnClicked = async (event, pid) =>{
 
     const currentURL = `${location.origin}/dashboard/${pid}`;
     const fetchInit = {
-        method:'DELETE'
+        method:"DELETE"
     };
 
     await fetch(currentURL,fetchInit)
     .then((res)=>{
-        if(res.ok&&res.status===200){
+        if(res.ok&&res.status===204){
             const dashboardURL = `${location.origin}/dashboard`;
 
             navigateTo(dashboardURL);
+        }
+        else{
+            res.json().then((result)=>{
+                alert(result.message);
+            });
         }
     })
     .catch((err)=>{
