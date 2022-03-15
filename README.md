@@ -16,7 +16,7 @@ MySQL, node js, Vanilla JS를 사용한 미니 게시판
 |테스트 코드|Mocha, supertest, should|
 
 # ERD
-![image](https://user-images.githubusercontent.com/47571973/153625981-794e8a72-2851-4cab-b0e9-fbd7f3f23beb.png)
+![image](https://user-images.githubusercontent.com/47571973/158368711-78af7d6d-253a-4efb-9d78-c770bf6dfbcd.png)
 
 회원 가입을 위한 Users 테이블과 게시글 작성 포스트를 위한 Posts 테이블이 존재한다.
 
@@ -28,4 +28,4 @@ MySQL, node js, Vanilla JS를 사용한 미니 게시판
 <a href="https://ordinary-bait-736.notion.site/Mini-Board-with-Authentication-API-3021f34860624022805be3498e567158">자세한 API 명세서</a>
 
 # 시연 영상
-
+## 회원가입

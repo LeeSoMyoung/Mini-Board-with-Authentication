@@ -23,6 +23,7 @@ function onSignUpConfirmClick(event, username, id, pw, pw_repeat) {
         .then((res) => {
             if(res.ok && res.status === 201){
                 navigateTo(location.origin+'/login');
+                alert('회원가입 되었습니다.');
             }
             else{
                 // 로그인에 실패하면
@@ -34,8 +35,6 @@ function onSignUpConfirmClick(event, username, id, pw, pw_repeat) {
         .catch((err) => {
             throw new Error(err.message);
         });
-
-    navigateTo(location.origin + '/login');
 }
 
 export { onSignUpConfirmClick };
